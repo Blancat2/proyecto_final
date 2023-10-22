@@ -6,22 +6,22 @@
     <title>Document</title>
 </head>
 <body>
-  /*leer blog*/
+
     {% for p in blogs %}
        <li>{{p}}</li>
+
+       <button>
+          <a href="{%url 'Leer_blogs' p.titulo %}"></a>
+          <a href="{%url 'Crear_blogs' p.titulo %}"></a>
+          <a href="{%url 'Editar_blogs' p.titulo %}"></a>
+          <a href="{%url 'Eliminar_blogs' p.titulo %}"></a>
+       </button>
 
     {% endfor %}
 
 
-  /*crear blog*/
-  <form action="">
-        {% csrf_token %}
 
-        {{form.as_p}}
-
-        <button type="submit"> Iniciar Sesion</button>
-    </form>
-
+  
   
 </body>
 </html>
