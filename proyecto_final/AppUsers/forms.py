@@ -20,7 +20,8 @@ class UserEditForm(UserCreationForm):
 
 
 class UserRegisterForm(UserCreationForm):
-    email = forms.emailField()
+    name_user = forms.CharField()
+    email = forms.EmailField()
     password1 = forms.CharField(label='Contraseña', widget=forms.PasswordInput)
     password2 = forms.CharField(label='Repetir la contraseña', widget=forms.PasswordInput)
 
