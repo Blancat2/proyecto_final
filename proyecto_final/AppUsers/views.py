@@ -21,17 +21,17 @@ def login_request(request):
 
                 
 
-                return render(request, "AppUsers/index.html", {"mensaje":f"Bienvenido {user}"})
+                return render(request, "index.html", {"mensaje":f"Bienvenido {user}"})
 
             else:
-                return render(request, "AppUsers/index.html", {"mensaje": "Error, datos incorrectos"})
+                return render(request, "index.html", {"mensaje": "Error, datos incorrectos"})
 
         else:
-            return render(request, "AppUsers/index.html", {"mensaje":"Error, formulario erroneo"})
+            return render(request, "index.html", {"mensaje":"Error, formulario erroneo"})
 
 
     form = AuthenticationForm()
-    return render(request, "AppUsers/index.html", {'form':form})
+    return render(request, "index.html", {'form':form})
 
 
 def register(request):
@@ -42,13 +42,13 @@ def register(request):
 
             name_user = form.cleaned_data['name_user']
             form.save()
-            return render(request, "AppUsers/index.html", {"mensaje": "Usuario Creado"})
+            return render(request, "index.html", {"mensaje": "Usuario Creado"})
         
     else:
         form = UserRegisterForm()
 
 
-    return render(request, "AppUsers/index.html", {"form":form})
+    return render(request, "index.html", {"form":form})
 
 
 def editar_perfil(request):
@@ -65,7 +65,7 @@ def editar_perfil(request):
             user.password2 = informacion['password2']
             user.save()
 
-            return render(request, "AppUsers/index.html")  
+            return render(request, "index.html")  
 
 
     else:
@@ -73,7 +73,7 @@ def editar_perfil(request):
         editarPerfiles = UserEditForm(initial={'email':user.email})
 
 
-    return render(request, "AppUsers/editar_perfil.html", {"editarPerfiles":editarPerfiles, "user":user}) 
+    return render(request, "editar_perfil.html", {"editarPerfiles":editarPerfiles, "user":user}) 
 
 def __str__(self):
   return f"{self.user} - {self.imagen}"
@@ -84,10 +84,10 @@ def leer_blogs(request):
     contexto= {"blogs", blogs}
 
     if Blogs == None:
-        return render(request, "AppUsers/blogs.html", {"mensaje": "No hay ningun blog todavia"})
+        return render(request, "blogs.html", {"mensaje": "No hay ningun blog todavia"})
 
 
-    return render(request, "AppUsers/blogs.html", contexto)
+    return render(request, "blogs.html", contexto)
 
 def crear_blog(request):
     if request.method == 'POST':
@@ -103,13 +103,13 @@ def crear_blog(request):
 
             blog.save()
 
-            return render(request, "AppUsers/blogs.html")
+            return render(request, "blogs.html")
     
     else:
         crearBlog = Blogs()
 
     
-    return render(request, "AppUsers/blogs.html", {"crearBlog":crearBlog})
+    return render(request, "blogs.html", {"crearBlog":crearBlog})
 
 
 def eliminar_blog(request, titulo):
@@ -120,7 +120,7 @@ def eliminar_blog(request, titulo):
 
     contexto = {"blog": blog}
 
-    return render(request, "AppUsers/blogs.html", contexto)
+    return render(request, "blogs.html", contexto)
 
 def editar_blog(request, titulo):
     
@@ -141,11 +141,11 @@ def editar_blog(request, titulo):
 
             blog.save()
 
-            return render(request, "AppUsers/blog.html")
+            return render(request, "blog.html")
         
     else:
         editarBlog = Blogs(initial={'titulo': blog.titulo, 'subtitulo': blog.subtitulo, 'texto': blog.texto})
 
     
-    return render(request, "AppUsers/blogs.html", {"editarBlog": editarBlog, "titulo": titulo})
+    return render(request, "blogs.html", {"editarBlog": editarBlog, "titulo": titulo})
             
